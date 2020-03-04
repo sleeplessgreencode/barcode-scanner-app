@@ -2,11 +2,12 @@ import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 
 import Warna from '../konstan/Warna';
+import FontText from '../komponen/dasar/FontText';
 
 const LayarShipping = () => {
   return (
     <View style={gaya.utama}>
-      <Text style={gaya.teks}>Halaman Shipping</Text>
+      <FontText>Halaman Shipping</FontText>
     </View>
   );
 };
@@ -17,9 +18,6 @@ const gaya = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: Warna.utama
-  },
-  teks: {
-    color: Warna.teks
   }
 });
 

@@ -20,6 +20,9 @@ const opsiStandarNavigasi = ({ navigation }) => ({
   headerStyle: {
     backgroundColor: Warna.hitam
   },
+  headerTitleStyle: {
+    fontFamily: 'roboto-bold'
+  },
   headerLeft: () => (
     <Ionicons
       name="md-menu"
