@@ -1,22 +1,36 @@
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { useState } from 'react';
+import { AppLoading } from 'expo';
+import * as Font from 'expo-font';
+
+// import navigasi utama sebagai layar yang akan diload saat aplikasi booting
+import NavigatorUtama from './navigasi/NavigatorUtama';
+
+// buat fungsi untuk memuat font yang diperlukan
+const muatFont = () => {
+  return Font.loadAsync({
+    'eczar-regular': require('./aset/font/Eczar-Regular.ttf'),
+    'eczar-bold': require('./aset/font/Eczar-Bold.ttf'),
+    'roboto-regular': require('./aset/font/RobotoCondensed-Regular.ttf'),
+    'roboto-bold': require('./aset/font/RobotoCondensed-Bold.ttf')
+  });
+};
 
 export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text style={styles.selamatDatang}>Selamat datang di aplikasi barcode-scanner!</Text>
-    </View>
-  );
-}
+  // buat state untuk mengevaluasi apakah font sudah dimuat saat aplikasi boot
+  const [fontDimuat, setFontDimuat] = useState(false);
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#393E46',
-    alignItems: 'center',
-    justifyContent: 'center'
-  },
-  selamatDatang: {
-    color: '#EEEEEE'
+  // jika font belum dimuat, start muatFont on finish, set fontDimuat state to true
+  if (!fontDimuat) {
+    return (
+      <AppLoading
+        startAsync={muatFont}
+        onFinish={() => {
+          setFontDimuat(true);
+        }}
+      />
+    );
   }
-});
+
+  // memuat navigasi utama
+  return <NavigatorUtama />;
+}
