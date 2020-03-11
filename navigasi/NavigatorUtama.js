@@ -16,6 +16,7 @@ import Warna from "../konstan/Warna";
 import FontText from "../komponen/dasar/FontText";
 
 // import komponen layar
+import LayarTest from "../layar/LayarTest";
 import LayarPacking from "../layar/LayarPacking";
 import LayarGoodReceipt from "../layar/LayarGoodReceipt";
 import LayarShipping from "../layar/LayarShipping";
@@ -43,6 +44,22 @@ const opsiStandarNavigasi = ({ navigation }) => ({
   headerBackTitleStyle: {},
   headerTintColor: Warna.hijau
 });
+
+// Stack untuk halaman terkait aktivitas testing
+const StackTesting = createStackNavigator(
+  {
+    Testing: LayarTest
+    // Tambahan layar dalam menu stacking dapat ditambahkan di dalam object ini
+  },
+  {
+    navigationOptions: {
+      drawerIcon: drawerConfig => (
+        <Ionicons name="md-cube" size={23} color={drawerConfig.tintColor} />
+      )
+    },
+    defaultNavigationOptions: opsiStandarNavigasi
+  }
+);
 
 // Stack untuk halaman terkait aktivitas packing
 const StackPacking = createStackNavigator(
@@ -126,6 +143,7 @@ const StackOther = createStackNavigator(
 // Konfigurasi stack dilakukan di masing - masing createStackNavigator terkait
 const NavigatorUtama = createDrawerNavigator(
   {
+    Testing: StackTesting,
     Packing: StackPacking,
     GoodReceipt: StackGoodReceipt,
     Shipping: StackShipping,
@@ -133,7 +151,7 @@ const NavigatorUtama = createDrawerNavigator(
     Other: StackOther
   },
   {
-    initialRouteName: "Packing",
+    initialRouteName: "Testing",
     contentOptions: {
       activeTintColor: Warna.hijau,
       activeBackgroundColor: Warna.hitam,
